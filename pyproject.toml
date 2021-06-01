@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "20210531-quantum-seminar"
+version = "0.1.0"
+description = ""
+authors = ["e5f6bd <41416412+e5f6bd@users.noreply.github.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+Qulacs = "^0.2.0"
+physics-tenpy = "^0.8.4"
+
+[tool.poetry.dev-dependencies]
+ipython = "^7.24.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
