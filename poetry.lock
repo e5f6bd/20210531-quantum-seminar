@@ -40,7 +40,7 @@ python-versions = ">=3.5"
 
 [[package]]
 name = "ipython"
-version = "7.24.0"
+version = "7.24.1"
 description = "IPython: Productive Interactive Computing"
 category = "dev"
 optional = false
@@ -165,7 +165,7 @@ python-versions = "*"
 
 [[package]]
 name = "prompt-toolkit"
-version = "3.0.18"
+version = "3.0.19"
 description = "Library for building powerful interactive command lines in Python"
 category = "dev"
 optional = false
@@ -191,12 +191,19 @@ optional = false
 python-versions = ">=3.5"
 
 [[package]]
-name = "qulacs"
+name = "Qulacs"
 version = "0.2.0"
 description = "Quantum circuit simulator for research"
 category = "main"
 optional = false
 python-versions = "*"
+develop = false
+
+[package.source]
+type = "git"
+url = "https://github.com/qulacs/qulacs.git"
+reference = "dev"
+resolved_reference = "bda68a710a2308caa0a1feaab944407bb3dc7c7b"
 
 [[package]]
 name = "scipy"
@@ -234,7 +241,7 @@ python-versions = "*"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.9"
-content-hash = "c3befc52587caa36f4ee658e8a02a94b00bcf7e854e1392349c4113bce6ea679"
+content-hash = "d07e89c3fc08fd4a7446b5ef80ae45475d0dab08f4bdb6e4731d50f7561e481c"
 
 [metadata.files]
 appnope = [
@@ -291,8 +298,8 @@ decorator = [
     {file = "decorator-5.0.9.tar.gz", hash = "sha256:72ecfba4320a893c53f9706bebb2d55c270c1e51a28789361aa93e4a21319ed5"},
 ]
 ipython = [
-    {file = "ipython-7.24.0-py3-none-any.whl", hash = "sha256:f86788eef439891438af3498525094cc2acbdbea4f2aa2f8895782d4ff471341"},
-    {file = "ipython-7.24.0.tar.gz", hash = "sha256:a171caa3d3d4c819a1c0742e3abecfd5a2b8ab525ca1c9f114b40b76b0679ab1"},
+    {file = "ipython-7.24.1-py3-none-any.whl", hash = "sha256:d513e93327cf8657d6467c81f1f894adc125334ffe0e4ddd1abbb1c78d828703"},
+    {file = "ipython-7.24.1.tar.gz", hash = "sha256:9bc24a99f5d19721fb8a2d1408908e9c0520a17fff2233ffe82620847f17f1b6"},
 ]
 ipython-genutils = [
     {file = "ipython_genutils-0.2.0-py2.py3-none-any.whl", hash = "sha256:72dd37233799e619666c9f639a9da83c34013a73e8bbc79a7a6348d93c61fab8"},
@@ -349,8 +356,8 @@ pickleshare = [
     {file = "pickleshare-0.7.5.tar.gz", hash = "sha256:87683d47965c1da65cdacaf31c8441d12b8044cdec9aca500cd78fc2c683afca"},
 ]
 prompt-toolkit = [
-    {file = "prompt_toolkit-3.0.18-py3-none-any.whl", hash = "sha256:bf00f22079f5fadc949f42ae8ff7f05702826a97059ffcc6281036ad40ac6f04"},
-    {file = "prompt_toolkit-3.0.18.tar.gz", hash = "sha256:e1b4f11b9336a28fa11810bc623c357420f69dfdb6d2dac41ca2c21a55c033bc"},
+    {file = "prompt_toolkit-3.0.19-py3-none-any.whl", hash = "sha256:7089d8d2938043508aa9420ec18ce0922885304cddae87fb96eebca942299f88"},
+    {file = "prompt_toolkit-3.0.19.tar.gz", hash = "sha256:08360ee3a3148bdb5163621709ee322ec34fc4375099afa4bbf751e9b7b7fa4f"},
 ]
 ptyprocess = [
     {file = "ptyprocess-0.7.0-py2.py3-none-any.whl", hash = "sha256:4b41f3967fce3af57cc7e94b888626c18bf37a083e3651ca8feeb66d492fef35"},
@@ -360,28 +367,7 @@ pygments = [
     {file = "Pygments-2.9.0-py3-none-any.whl", hash = "sha256:d66e804411278594d764fc69ec36ec13d9ae9147193a1740cd34d272ca383b8e"},
     {file = "Pygments-2.9.0.tar.gz", hash = "sha256:a18f47b506a429f6f4b9df81bb02beab9ca21d0a5fee38ed15aef65f0545519f"},
 ]
-qulacs = [
-    {file = "Qulacs-0.2.0-cp27-cp27m-macosx_10_9_x86_64.whl", hash = "sha256:badd2a845ee4126086370277d47f823b3034e840cbd4590ebbf72eda4293370c"},
-    {file = "Qulacs-0.2.0-cp27-cp27m-manylinux2010_x86_64.whl", hash = "sha256:1c1db1e42643507eb7bcb66510700564022090a75522722a7c670b1d9afb4080"},
-    {file = "Qulacs-0.2.0-cp27-cp27m-win_amd64.whl", hash = "sha256:e86600829611e1442d1d162b87170ac37430bb5d6ea3bbeeba52b41fe24ce57c"},
-    {file = "Qulacs-0.2.0-cp27-cp27mu-manylinux2010_x86_64.whl", hash = "sha256:843fc4a986289989028140877485a38248fb3f6c8c396ff752085874645bf6c6"},
-    {file = "Qulacs-0.2.0-cp35-cp35m-macosx_10_9_x86_64.whl", hash = "sha256:93a3ae6ad7a27e47006151de2e77471245a6434fc33f91accbf45c7edc288d83"},
-    {file = "Qulacs-0.2.0-cp35-cp35m-manylinux2010_x86_64.whl", hash = "sha256:b716cd2dbc4fde7efc318c50dd50732852ec56ccfed4b888216470f7b787195a"},
-    {file = "Qulacs-0.2.0-cp35-cp35m-win_amd64.whl", hash = "sha256:ede6a46e49bb43ac00c20fe5c37221ec28c92d6115561a0129fd30ca716a2fd4"},
-    {file = "Qulacs-0.2.0-cp36-cp36m-macosx_10_9_x86_64.whl", hash = "sha256:fb1924f2649a87fd22fc23cfd98b8e3c759728b1a0a8beaeaf738271c421f379"},
-    {file = "Qulacs-0.2.0-cp36-cp36m-manylinux2010_x86_64.whl", hash = "sha256:4849e793c74489192ba376785d9016d7fe7aede07bb9fdf7ad92f0d678b98959"},
-    {file = "Qulacs-0.2.0-cp36-cp36m-win_amd64.whl", hash = "sha256:1ed11f8838fc50e23fca6a101185504bffc8b1165d7e9c319fa3315c719c72b8"},
-    {file = "Qulacs-0.2.0-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:cc5fee57cd8ea81fab408850fe476fc3a0f9f98a3c33abbc85847db99222990e"},
-    {file = "Qulacs-0.2.0-cp37-cp37m-manylinux2010_x86_64.whl", hash = "sha256:67eb7a311383118f0a46ed72df0941e40a5dd03d0b327b9c22c2d8285ce2ece5"},
-    {file = "Qulacs-0.2.0-cp37-cp37m-win_amd64.whl", hash = "sha256:c7a9c0969e5ac471a131aab58dde953ce6d43989133501fc09bf62a87d0731fe"},
-    {file = "Qulacs-0.2.0-cp38-cp38-macosx_10_9_x86_64.whl", hash = "sha256:02e1a6d095af92835844cc697687798974c3c347fe50c40294b6dfc9566c7496"},
-    {file = "Qulacs-0.2.0-cp38-cp38-manylinux2010_x86_64.whl", hash = "sha256:cc47883753263cba9080adcedca61eee9fe25ca8198f5929912733ea27b2c190"},
-    {file = "Qulacs-0.2.0-cp38-cp38-win_amd64.whl", hash = "sha256:709d11114190b566f799f94cbe65048b07e1bd1cf3c8f4439278248d7a718644"},
-    {file = "Qulacs-0.2.0-cp39-cp39-macosx_10_9_x86_64.whl", hash = "sha256:517d9788d03b86ffb4e9aadf8f698902fd71bafec67404a0b1652c0b0e956f23"},
-    {file = "Qulacs-0.2.0-cp39-cp39-manylinux2010_x86_64.whl", hash = "sha256:8b3b053b57c0a2f3d46bbe9239538d7ecc23ef50fdb882c96ceb851fff156961"},
-    {file = "Qulacs-0.2.0-cp39-cp39-win_amd64.whl", hash = "sha256:9840b2bbbb6d6f048c129f0c3831490c3af217c24e3bc47fcccef40200e98976"},
-    {file = "Qulacs-0.2.0.tar.gz", hash = "sha256:9541ad8aefa3fed7c7cbb883a5f9692d8230bbb094cb904d6b2bb63469437823"},
-]
+Qulacs = []
 scipy = [
     {file = "scipy-1.6.1-cp37-cp37m-macosx_10_9_x86_64.whl", hash = "sha256:a15a1f3fc0abff33e792d6049161b7795909b40b97c6cc2934ed54384017ab76"},
     {file = "scipy-1.6.1-cp37-cp37m-manylinux1_i686.whl", hash = "sha256:e79570979ccdc3d165456dd62041d9556fb9733b86b4b6d818af7a0afc15f092"},

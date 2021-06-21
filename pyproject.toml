@@ -7,8 +7,9 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Qulacs = "^0.2.0"
+# Qulacs = "^0.2.0"
 physics-tenpy = "^0.8.4"
+Qulacs = { git = "https://github.com/qulacs/qulacs.git", branch = "dev" }
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.24.0"
