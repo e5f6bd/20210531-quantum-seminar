@@ -28,10 +28,10 @@ def simulate(n: int, k: int, l: int, randomize: Randomizer):
     d = npl.norm(trace.get_matrix() - base, 'nuc')
     return d
 
-def construct_lrc(depth: int, circuit: QuantumCircuit, p: int, q: int):
+def construct_lrc(depth: int, circuit: QuantumCircuit, s: int, t: int):
     for d in range(depth):
-        i = p + d % 2
-        while i + 1 < q:
+        i = s + d % 2
+        while i + 1 < t:
             circuit.add_random_unitary_gate([i, i+1])
             i += 2
 
