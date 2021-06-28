@@ -26,4 +26,8 @@ def simulate(n: int, k: int, l: int, randomize: Randomizer):
     return d
 
 def construct_lrc(depth: int, circuit: QuantumCircuit, p: int, q: int):
-    pass
+    for d in range(depth):
+        i = p + d % 2
+        while i + 1 < q:
+            circuit.add_random_unitary_gate([i, i+1])
+            i += 2
