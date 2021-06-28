@@ -1,32 +1,37 @@
-from qulacs import QuantumState, QuantumCircuit
-from qulacs.state import partial_trace
+from datetime import datetime
+from pathlib import Path
+
 import numpy as np
-import numpy.linalg as npl
+from argparse import ArgumentParser
+from common import Randomizer, construct_lrc, simulate
 
-def simulate(n: int, k: int, l: int):
-    state = QuantumState(n + k)
-    state.set_zero_state()
-
-    circuit = QuantumCircuit(n + k)
-    for i in range(k):
-        circuit.add_H_gate(i)
-        circuit.add_CNOT_gate(i, i+k)
-    circuit.add_random_unitary_gate(range(k, n+k))
-
-    circuit.update_quantum_state(state)
-
-    trace = partial_trace(state, list(range(k, k+l)))
-    base = np.eye(1 << (n + k - l)) / np.power(2, n + k - l)
-    d = npl.norm(trace.get_matrix() - base, 1)
-    return d
+def get_randomizer(kind: str) -> Randomizer:
+    if kind == "haar":
+        return lambda circuit, p, q: circuit.add_random_unitary_gate(range(p, q))
+    if kind == "lrc":
+        return construct_lrc
+    raise RuntimeError(f"Unknown randomizer kind: {kind}")
 
 def main():
-    n, k = 9, 1
-    r = 10
-    for l in range(1, n+k):
-        ds = [simulate(n, k, l) for _ in range(r)]
-        # print(f"{ds=} {np.average(ds)=} {np.std(ds)=}")
-        print("\t".join(map(str, [l, np.average(ds), np.std(ds)])))
+    parser = ArgumentParser()
+    parser.add_argument("n", type=int)
+    parser.add_argument("k", type=int)
+    parser.add_argument("r", type=int)
+    parser.add_argument("random_kind", choices=["haar", "lrc"])
+    parser.add_argument("--output", type=Path)
+    args = parser.parse_args()
+
+    n, k, r = args.n, args.k, args.r
+    randomizer = get_randomizer(args.random_kind)
+    output_path = args.output or Path(__file__).parent / "output" / \
+            f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_hp_n{n:02d}_k{k:02d}_r{r:02d}_{args.random_kind}.tsv"
+    print(f"Outputing to {output_path}")
+
+    with open(output_path, "w") as f:
+        for l in range(1, n+k):
+            ds = [simulate(n, k, l, randomizer) for _ in range(r)]
+            print(f"{ds=} {np.average(ds)=} {np.std(ds)=}")
+            f.write("\t".join(map(str, [l, np.average(ds), np.std(ds)])) + "\n")
 
 if __name__ == '__main__':
     main()
