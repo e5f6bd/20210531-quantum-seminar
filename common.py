@@ -25,5 +25,5 @@ def simulate(n: int, k: int, l: int, randomize: Randomizer):
     d = npl.norm(trace.get_matrix() - base, 'nuc')
     return d
 
-def construct_lrc(circuit: QuantumCircuit, p: int, q: int):
+def construct_lrc(depth: int, circuit: QuantumCircuit, p: int, q: int):
     pass
