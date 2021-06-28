@@ -1,4 +1,4 @@
 set xrange [0:]
-plot ARG1 with errorbars, ARG2 with errorbars
+plot ARG1 with errorlines, ARG2 with errorlines
 pause -1
 
