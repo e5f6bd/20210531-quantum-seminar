@@ -1,8 +1,11 @@
+from functools import partial
 from typing import Callable
-from qulacs import QuantumState, QuantumCircuit
-from qulacs.state import partial_trace
+
 import numpy as np
 import numpy.linalg as npl
+from qulacs import QuantumCircuit, QuantumState
+
+from qulacs.state import partial_trace
 
 Randomizer = Callable[[QuantumCircuit, int, int], None]
 
@@ -31,3 +34,10 @@ def construct_lrc(depth: int, circuit: QuantumCircuit, p: int, q: int):
         while i + 1 < q:
             circuit.add_random_unitary_gate([i, i+1])
             i += 2
+
+def get_randomizer_getter(kind: str):  # -> Callable[[Any], Randomizer]:
+    if kind == "haar":
+        return lambda **_: lambda circuit, p, q: circuit.add_random_unitary_gate(range(p, q))
+    if kind == "lrc":
+        return lambda depth, **_: partial(construct_lrc, depth)
+    raise RuntimeError(f"Unknown randomizer kind: {kind}")

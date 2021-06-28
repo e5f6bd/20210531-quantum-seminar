@@ -1,18 +1,10 @@
 from argparse import ArgumentParser
 from datetime import datetime
 from pathlib import Path
-from functools import partial
 
 import numpy as np
 
-from common import construct_lrc, simulate
-
-def get_randomizer_getter(kind: str):  # -> Callable[[Any], Randomizer]:
-    if kind == "haar":
-        return lambda **_: lambda circuit, p, q: circuit.add_random_unitary_gate(range(p, q))
-    if kind == "lrc":
-        return lambda depth, **_: partial(construct_lrc, depth)
-    raise RuntimeError(f"Unknown randomizer kind: {kind}")
+from common import get_randomizer_getter, simulate
 
 def main():
     parser = ArgumentParser()
