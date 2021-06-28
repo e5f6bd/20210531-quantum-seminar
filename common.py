@@ -22,7 +22,7 @@ def simulate(n: int, k: int, l: int, randomize: Randomizer):
 
     trace = partial_trace(state, list(range(k, k+l)))
     base = np.eye(1 << (n + k - l)) / np.power(2, n + k - l)
-    d = npl.norm(trace.get_matrix() - base, 1)
+    d = npl.norm(trace.get_matrix() - base, 'nuc')
     return d
 
 def construct_lrc(circuit: QuantumCircuit, p: int, q: int):
