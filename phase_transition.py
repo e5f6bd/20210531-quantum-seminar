@@ -8,13 +8,16 @@ from qulacs import QuantumCircuit, QuantumState
 from qulacs.gate import DenseMatrix, CPTP
 from qulacs.state import partial_trace
 
+def nlogn(x: complex) -> float:
+    x = np.real(x)
+    return x * np.log2(x)
+
 def renyi(a: float, m) -> float:
     assert(a >= 0)
     if a == 1:
-        return sum(x * np.log2(x) for x in npl.eig(m))
+        return sum(nlogn(x) for x in npl.eig(m))
     else:
-        print(npl.matrix_power(m, a))
-        return np.log2(np.trace(npl.matrix_power(m, a))) / (1-a)
+        return np.log2(np.real(np.trace(npl.matrix_power(m, a)))) / (1-a)
 
 def simulate(n: int, d: int, p: float) -> float:
     assert(0 <= p <= 1)
