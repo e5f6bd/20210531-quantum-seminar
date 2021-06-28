@@ -8,25 +8,21 @@ from qulacs import QuantumCircuit, QuantumState
 from qulacs.gate import DenseMatrix, CPTP
 from qulacs.state import partial_trace
 
-def nlogn(x: complex) -> float:
-    x = np.real(x)
-    return x * np.log2(x)
-
 def renyi(a: float, m) -> float:
     assert(a >= 0)
     if a == 1:
-        return sum(nlogn(x) for x in npl.eig(m))
+        return -sum(x * np.log2(x) for x in npl.eigvalsh(m) if x > 0)
     else:
         return np.log2(np.real(np.trace(npl.matrix_power(m, a)))) / (1-a)
 
-def simulate(n: int, d: int, p: float) -> float:
+def simulate(n: int, d: int, p: float, a: int) -> float:
     assert(0 <= p <= 1)
 
     circuit = QuantumCircuit(n)
     for k in range(d):
         for j in range(n//2):
             i = j * 2 + k % 2
-            circuit.add_random_unitary_gate([j, (j+1) % n])
+            circuit.add_random_unitary_gate([i, (i+1) % n])
         for i in range(n):
             sp, sq = np.sqrt(p), np.sqrt(1-p)
             circuit.add_gate(CPTP([
@@ -47,8 +43,10 @@ def simulate(n: int, d: int, p: float) -> float:
     ret = 0
     for i in range(1, 8):
         trace_range = [x for j, r in enumerate(ranges) for x in r if not 1 << j & i << 1]
-        coef = 2 * bin(i).count('1') - 1
-        ret += coef * renyi(2, partial_trace(state, trace_range).get_matrix())
+        coef = bin(i).count('1') % 2 * 2 - 1
+        entropy = renyi(a, partial_trace(state, trace_range).get_matrix())
+        ret += coef * entropy
+        # print(coef, trace_range, entropy)
 
     return ret
 
@@ -57,20 +55,22 @@ def main():
     parser.add_argument("n", type=int)
     parser.add_argument("d", type=int)
     parser.add_argument("r", type=int)
+    parser.add_argument("a", type=int)
     parser.add_argument("ps", type=str, help="space separated floats")
     parser.add_argument("--output", type=Path)
     args = parser.parse_args()
 
-    n, r, d = args.n, args.d, args.r
+    n, d, r, a = args.n, args.d, args.r, args.a
     ps = list(map(float, args.ps.split()))
 
     output_dir = Path(__file__).parent / "output" 
-    output = args.output or output_dir / f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_pt_n{n:02d}_d{d:02d}_r{r:02d}.tsv"
+    output = args.output or output_dir / f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_pt_n{n:02d}_d{d:02d}_a{a}_r{r:02d}.tsv"
 
     with open(output, "w") as f:
         for p in ps:
-            ds = [simulate(n, d, p) for _ in range(d)]
+            ds = [simulate(n, d, p, a) for _ in range(r)]
             av, std = np.average(ds), np.std(ds)
+            print(f"{p=}\t{av}±{std}")
             f.write("\t".join(map(str, [p, av, std])) + "\n")
 
 if __name__ == '__main__':
