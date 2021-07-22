@@ -1,0 +1,1 @@
+'/Users/seasellsheshell/dev/git/com/github/e5f6bd/20210531-quantum-seminar/phase_transition.py' '8' '32' '30' '2' '0' '--entanglement-entropy=2 3 4 5' '--measure-for=0 1 2 3'
