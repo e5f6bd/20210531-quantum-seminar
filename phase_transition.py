@@ -104,7 +104,7 @@ def main():
         for p in ps:
             ds = [simulate(n, d, p, a, measure_for, **entanglement_entropy_args) for _ in range(r)]
             av, std = np.average(ds), np.std(ds)
-            print(f"{datetime.now()}\t{p=}\t{av}±{std}")
+            print(f"{datetime.now()}\tp={p}\t{av}±{std}")
             f.write("\t".join(map(str, [p, av, std])) + "\n")
 
 if __name__ == '__main__':
