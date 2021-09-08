@@ -6,6 +6,7 @@ import numpy as np
 
 from common import get_randomizer_getter, simulate
 
+
 def main():
     parser = ArgumentParser()
     parser.add_argument("n", type=int)
@@ -30,15 +31,22 @@ def main():
         raise RuntimeError(f"Unknown randomizer kind: {kind}")
 
     randomizer_info = "".join(f"_{k}{v}" for k, v in randomizer_args.items())
-    output_path = args.output or Path(__file__).parent / "output" / \
-            f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_hp_n{n:02d}_k{k:02d}_r{r:02d}_{kind}{randomizer_info}.tsv"
+    output_path = (
+        args.output
+        or Path(__file__).parent
+        / "output"
+        / f"{datetime.now().strftime('%Y%m%d_%H%M%S')}_hp_n{n:02d}_k{k:02d}_r{r:02d}_{kind}{randomizer_info}.tsv"
+    )
     print(f"Outputing to {output_path}")
 
     with open(output_path, "w") as f:
-        for l in range(1, n+k):
-            ds = [simulate(n, k, l, get_randomizer(**randomizer_args)) for _ in range(r)]
+        for l in range(1, n + k):
+            ds = [
+                simulate(n, k, l, get_randomizer(**randomizer_args)) for _ in range(r)
+            ]
             print(f"{ds=} {np.average(ds)=} {np.std(ds)=}")
             f.write("\t".join(map(str, [l, np.average(ds), np.std(ds)])) + "\n")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

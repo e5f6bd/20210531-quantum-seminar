@@ -10,6 +10,7 @@ python = "^3.9"
 # Qulacs = "^0.2.0"
 physics-tenpy = "^0.8.4"
 Qulacs = { git = "https://github.com/qulacs/qulacs.git", branch = "dev" }
+black = "^21.8b0"
 
 [tool.poetry.dev-dependencies]
 ipython = "^7.24.0"
