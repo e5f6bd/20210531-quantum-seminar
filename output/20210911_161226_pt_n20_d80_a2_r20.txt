@@ -1,0 +1,1 @@
+'/home/ide/20210531-quantum-seminar/phase_transition.py' '20' '80' '20' '2' '0.5' '--measure-for=1 3 5 7 9 11 13 15 17 19'
